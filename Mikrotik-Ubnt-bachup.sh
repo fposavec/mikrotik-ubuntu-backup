@@ -1,11 +1,12 @@
 #!/bin/bash
 datum=`date "+%Y-%m-%d"`
-HOME_PATH=/home/ubntbackup
-BACKUP_PATH=$HOME_PATH/backup/$datum
+HOME_PATH=`dirname $0`
 lista=$HOME_PATH/lista_mikrtikubnt.lst
+BACKUP_PATH=$HOME_PATH/backup/$datum
 IFS=$'\n'
 greska=0
-error_log=/tmp/ubnt-backup.tmp
+error_log=/tmp/mikrotik-ubnt-backup.tmp
+email="backup@example.com"
 date > $error_log
 sshopcije="-oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null"
 defuserubnt="ubnt"
@@ -138,7 +139,7 @@ fi
 
 
 if [ $greska -ne 0 ]; then
-	cat $error_log | mail -s "UBNT BAckup error" backup@entitas.hr
+	cat $error_log | mail -s "MIKROTIK - UBNT BACKUP error" $email
 fi
 
 rm $error_log
