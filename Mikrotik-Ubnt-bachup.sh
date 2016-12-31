@@ -2,8 +2,7 @@
 datum=`date "+%Y-%m-%d"`
 HOME_PATH=/home/ubntbackup
 BACKUP_PATH=$HOME_PATH/backup/$datum
-lista=$HOME_PATH/lista.txt
-USER=ubnt
+lista=$HOME_PATH/lista_mikrtikubnt.lst
 IFS=$'\n'
 greska=0
 error_log=/tmp/ubnt-backup.tmp
@@ -85,7 +84,7 @@ function ubntbackup {
 	echo Izlaz: $izlaz >>$error_log
 	echo >> $error_log
 	if [ "$REBOOT" == "REBOOT" ]; then
-		komanda="ssh  $USER@$ADRESA -p $PORT reboot"
+		komanda="ssh  $ubnt_user@$ADRESA -p $PORT reboot"
 		echo $komanda >> $error_log
 		$komanda >> $error_log 2>> $error_log
 		izlaz=$?
